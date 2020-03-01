@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Details</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <h1><%= flightHeader %></h1>
+    <section>
+        <div>Flight: <%= `${flight.airline} ${flight.flightNo}`%></div>
+        <div>Airport: <%= flight.airport %></span></div>
+        <div>Departing Airport: <%=flight.airport%>, Time: <%=flight.departs%>
+        </div><br>
+        <form action="/flight/<%=flight._id%>/destinations" method="POST">
+            <label>Destination Airport:
+                <select name="airport">
+                    <option value="AUS">AUS</option>
+                    <option value="DFW">DW</option>
+                    <option value="DEN">DEN</option>
+                    <option value="LAX">LAX</option>
+                    <option value="SAN">SAN</option>
+                </select>
+            </label><br>
+            <label>Arrival Date:
+                <input type="datetime-local" name="arrival">
+            </label><br>
+            <input type="submit" value="Add Destination">
+        </form>
+        <br><br>
+        </section>
+        <section class="destination-display">
+        <% if (flight.destinations.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Destination</th>
+                    <th>Arrival Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% flight.destinations.forEach(e => { %>
+                <tr>
+                    <td><%= e.airport %></td>
+                    <td><%= String(e.arrival).substr(0, 24) %> <%= String(e.arrival).substr(34, 23)%></td>
+                </tr>
+            </tbody>
+            <% }); %>
+        </table>
+        <% } else { %>
+        <h5>No Destinations Added</h5>
+        <% } %>
+    </section>
+</body>
+
+</html>

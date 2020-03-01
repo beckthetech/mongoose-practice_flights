@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+  color: #424748;
+  font-weight: bold;
+}
+
+body {
+  padding: 50px;
+  background-color: azure;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+}
+
+table {
+  width: 80vw;
+  margin: auto;
+}
+
+td {
+  border: 1px solid black;
+  padding: 4px;
+}
+
+.new-flight {
+  padding: 5px;
+}
+
+a {
+  color: black;
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.detail {
+  font-weight: 900;
+}
+
+td {
+  margin: 50px;
+  height: 50px;
+}

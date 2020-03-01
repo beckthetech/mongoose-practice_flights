@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights Index</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="new-flight">
+        <a href="/flights/new">Add New Flight</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Airline</th>
+                <th>Flight Number</th>
+                <th>Departs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flights.forEach(function(f) { %>
+            <tr>
+                <td><%= f.airline %></td>
+                <td><%= f.flightNo %></td>
+                <td><%= f.departs %></td>
+                <td>
+                    <a href="/flights/<%= f._id %>">Flight Details</a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
