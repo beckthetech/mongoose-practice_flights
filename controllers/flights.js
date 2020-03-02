@@ -1,15 +1,26 @@
 const Flight = require('../models/flight');
+const Ticket = require('../models/ticket');
 
 module.exports = {
     index,
     new: newFlight,
     create,
     show,
+    delete: deleteFlight
+}
+
+function deleteFlight(req, res) {
+    console.log(req.body);
+    console.log(req.params.id);
+    Flight.findOneAndDelete((req.params.id), (err, result) => console.log(result));
+    res.redirect('/flights');
 }
 
 function show(req, res) {
-    Flight.findById(req.params.id, (err, flight) => {
-        res.render('flights/show', { flightHeader: `Flight Number ${flight.flightNo} Details:`, flight });
+    Flight.findById(req.params.id).populate('tickets').exec((err, flight) => {
+        Ticket.find({ flight: flight._id }, (err, tickets) => {
+            res.render('flights/show', { flightHeader: `Flight Number ${flight.flightNo} Details:`, flight, tickets });
+        });
     })
 }
 
@@ -30,7 +41,6 @@ function create(req, res) {
     const flight = new Flight(req.body);
     flight.save(err => {
         if (err) return res.render('flights/index');
-        console.log(flight);
         res.redirect('/flights')
     })
 }

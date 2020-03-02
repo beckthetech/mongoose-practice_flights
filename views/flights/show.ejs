@@ -10,12 +10,15 @@
 
 <body>
     <h1><%= flightHeader %></h1>
+    <form action="/flights/<%= flight._id %>?_method=DELETE" class="delete-form" method="POST">
+        <button type="submit">Delete This Flight</button>
+    </form><br>
     <section>
         <div>Flight: <%= `${flight.airline} ${flight.flightNo}`%></div>
         <div>Airport: <%= flight.airport %></span></div>
         <div>Departing Airport: <%=flight.airport%>, Time: <%=flight.departs%>
         </div><br>
-        <form action="/flight/<%=flight._id%>/destinations" method="POST">
+        <form action="/flight/<%= flight._id %>/destinations" method="POST">
             <label>Destination Airport:
                 <select name="airport">
                     <option value="AUS">AUS</option>
@@ -31,8 +34,8 @@
             <input type="submit" value="Add Destination">
         </form>
         <br><br>
-        </section>
-        <section class="destination-display">
+    </section>
+    <section class="destination-display">
         <% if (flight.destinations.length) { %>
         <table>
             <thead>
@@ -53,7 +56,19 @@
         <% } else { %>
         <h5>No Destinations Added</h5>
         <% } %>
-    </section>
+    </section><br>
+    <div>TICKETS</div>
+    <form action="/flights/<% flight._id %>/tickets" method="GET">
+        <button type="submit">New Ticket</button>
+    </form>
+    <table>
+        <% flight.tickets.forEach(t => { %>
+        <tr>
+            <td><%= t.seat %></td>
+        </tr>
+        <% }); %>
+    </table><br>
+    <a href="/flights">Back To Directory</a>
 </body>
 
 </html>
